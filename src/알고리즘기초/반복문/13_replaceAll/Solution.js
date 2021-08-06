@@ -1,7 +1,8 @@
-function makeMultiplesOfDigit(num) {
+function replaceAll(str, from, to) {
   let result = '';
-  for (i = 3; i <= num; i = i + 3) {
-    result += i;
+  for (let i = 0; i < str.length; ++i) {
+    if (str[i] !== from) result += str[i];
+    else if (str[i] === from) result += to;
   }
   return result;
 }
