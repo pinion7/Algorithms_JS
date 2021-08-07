@@ -1,29 +1,31 @@
-### 13_replaceAll
+### 17_isPrime
 
 ***
 
 ###### 문제 
 
-문자열과 두 개의 문자(from, to)를 입력받아, 문자열에 등장하는 특정 문자(from)가 다른 문자(to)로 바뀐 문자열을 리턴해야 합니다.
+1 이상의 자연수를 입력받아 소수(prime number)인지 여부를 리턴해야 합니다.
 
 ##### 입력
 
-인자 1 : str
-- string 타입의 문자열
-
-인자 2 : from
-- string 타입의 문자
-- from.length는 1
-
-인자 3 : to
-- string 타입의 문자
-- to.length는 1
+인자 1 : num
+- number 타입의 수
 
 ##### 출력
 
-- string 타입을 리턴해야 합니다.
+- boolean 타입을 리턴해야 합니다.
 
 ##### 입출력 예시
 
-let output = replaceAll('loop', 'o', 'e');
-console.log(output); // --> 'leep'
+let output = isPrime(2);
+console.log(output); // --> true
+
+output = isPrime(6);
+console.log(output); // --> false
+
+output = isPrime(17);
+console.log(output); // --> true
+
+##### 힌트
+
+- 자바스크립트 내장 객체인 Math를 활용해 불필요한 연산을 줄일 수 있습니다. (javascript square root 또는 자바스크립트 제곱근)
