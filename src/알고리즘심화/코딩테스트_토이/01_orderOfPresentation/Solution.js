@@ -15,13 +15,13 @@ function orderOfPresentation (N, K) {
   // 결국 K배열 이전에 만들어질 수 있는 모든 경우의 수가 합산되어 result에 담기게 된다.
   let result = 0;
 
-  for(let i = 0; i < N; ++i) {
+  for (let i = 0; i < N; ++i) {
     let count = 0;
-    for(let j = i + 1; j < N; ++j) {
+    for (let j = i + 1; j < N; ++j) {
       if(K[i] > K[j]) ++count;
     }
     
-    for(let k = 1; k < N - i; ++k) {
+    for (let k = 1; k < N - i; ++k) {
       count *= k;
     }
     result += count;
