@@ -1,8 +1,6 @@
-function getElementsUpTo(arr, n) {
-  if (arr.length <= n) {
-    return [];
-  }
-  return arr.slice(0, n);
+function removeFromBackOfNew(arr) {
+  newArr = arr.slice();
+  return newArr.slice(0, newArr.length - 1)
 }
 
 

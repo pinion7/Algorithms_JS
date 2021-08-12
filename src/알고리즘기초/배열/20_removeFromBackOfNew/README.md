@@ -1,33 +1,31 @@
-### 15_getElementsUpTo
+### 20_removeFromBackOfNew
 
 ***
 
 ###### 문제 
 
-배열과 인덱스를 입력받아 주어진 인덱스 이전의 요소들을 갖는 새로운 배열을 리턴해야 합니다.
+배열을 입력받아 배열의 마지막 요소가 제외된 새로운 배열을 리턴해야 합니다.
 
 ##### 입력
 
 인자 1 : arr
 - 임의의 요소를 갖는 배열
 
-인자 2 : n
-- number 타입의 인덱스 (0 이상의 정수)
-
 ##### 출력
 
-- n번 인덱스 이전의 새로운 배열을 리턴해야 합니다.
+- 새로운 배열(주소값 다름)을 리턴해야 합니다.
 
 ##### 주의 사항
 
-- 반복문(for, while) 사용은 금지됩니다.
-- 빈 배열을 입력받은 경우, 빈 배열을 리턴해야 합니다.
-- 배열의 길이를 넘는 인덱스를 입력받은 경우, 빈 배열을 리턴해야 합니다.
+- 입력받은 배열을 수정하지 않아야 합니다(immutability).
 
 ##### 입출력 예시
 
-let output = getElementsUpTo(['a', 'b', 'c', 'd', 'e'], 3);
-console.log(output); // --> ['a', 'b', 'c']
+let arr = [1, 2, 3];
+let output = removeFromBackOfNew(arr);
+console.log(output); // --> [1, 2]
+console.log(arr); // --> [1, 2, 3]
 
-let output = getElementsUpTo(['a', 'b', 'c', 'd', 'e'], 6);
-console.log(output); // --> []
+#### 힌트
+mdn array slice를 검색해보세요.
+불변성(immutability)에 대해서 검색해 봅니다. (immutability in javascript 또는 자바스크립트 불변성)
