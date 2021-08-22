@@ -1,28 +1,29 @@
-### 05_firstReverse
+### 06_letterCapitalize
 
 ***
 
 ###### 문제 
 
-문자열을 입력받아 순서가 뒤집힌 문자열을 리턴해야 합니다.
+문자열을 입력받아 문자열을 구성하는 각 단어의 첫 글자가 대문자인 문자열을 리턴해야 합니다.
 
 ##### 입력
 
 인자 1 : str
-- string 타입의 문자열
+- string 타입의 공백이 있는 알파벳 문자열
 
 ##### 출력
 
 - string 타입을 리턴해야 합니다.
 
+##### 주의 사항s
+
+- 단어는 공백으로 구분합니다.
+- 연속된 공백이 존재할 수 있습니다.
+- 빈 문자열을 입력받은 경우, 빈 문자열을 리턴해야 합니다.
+
 ##### 입출력 예시
 
-let output = firstReverse('codestates');
-console.log(output); // "setatsedoc"
-
-output = firstReverse('I love codestates');
-console.log(output); // "setatsedoc evol I"
-
-##### 힌트
-
-- 배열은 arr.reverse를 통해 쉽게 뒤집을 수 있습니다.
+let output1 = letterCapitalize('hello world');
+console.log(output1); // "Hello World"
+let output2 = letterCapitalize('javascript  is sexy ');
+console.log(output2); // "Javascript  Is Sexy "
