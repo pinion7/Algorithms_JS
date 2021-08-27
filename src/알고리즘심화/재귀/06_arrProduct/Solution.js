@@ -1,8 +1,7 @@
-function factorial(num) {
-  if (num <= 1) return 1;
-  return num * factorial(num - 1);
+function arrProduct(arr) {
+  if (arr.length === 0) return 1;
+  return arr[0] * arrProduct(arr.slice(1));
 }
-
 
 
 
