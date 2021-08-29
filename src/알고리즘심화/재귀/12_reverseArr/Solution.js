@@ -1,7 +1,6 @@
-function take(num, arr) {
-  if (num > arr.length) return arr
-  if (num === 0) return [];
-  return [arr[0]].concat(take(--num, arr.slice(1)));
+function reverseArr(arr) {
+  if (arr.length === 0) return arr;
+  return reverseArr(arr.slice(1)).concat(arr[0]);
 }
 
 
