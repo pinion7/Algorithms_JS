@@ -1,7 +1,7 @@
-function take(num, arr) {
-  if (num > arr.length) return arr
-  if (num === 0) return [];
-  return [arr[0]].concat(take(--num, arr.slice(1)));
+function or(arr) {
+  if (arr.length === 0) return false;
+  if (arr[0]) return true;
+  return or(arr.slice(1));
 }
 
 
