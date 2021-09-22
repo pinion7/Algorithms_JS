@@ -1,29 +1,53 @@
+// 총 5개의 작업을 3명이서 작업한다고 가정한다.
+// 첫번째 작업자는 최대 3개의 작업을 할 수 있다.
+// (jobs, workersNum)으로 표기하면, (jobs는 작업량이 아닌 작업의 인덱스만 표기한다고 한다)
+// 처음은 ([0, 1, 2, 3, 4], 3)인 상태이다.
+//  1) 첫번째 작업자가 1개의 작업을 하고 나머지 작업을 2명이 작업
+//    => ([1, 2, 3, 4], 2)
+//  2) 첫번째 작업자가 2개의 작업을 하고 나머지 작업을 2명이 작업
+//    => ([2, 3, 4], 2)
+//  3) 첫번째 작업자가 3개의 작업을 하고 나머지 작업을 2명이 작업
+//    => ([3, 4], 2)
+// 아래 두 가지 경우를 통해, 문제가 중복되어 계산된다는 것을 알 수 있다.
+//  1-1) 첫번째 작업자가 1개의 작업을 하고, 그 다음 작업자가 2개의 작업을 한 경우
+//    => ([3, 4], 1)
+//  2-1) 첫번째 작업자가 2개의 작업을 하고, 그 다음 작업자가 1개의 작업을 한 경우
+//    => ([3, 4], 1)
+// 메모이제이션을 통해 중복 계산을 피한다.
 const jobAllocation = function (jobs, workersNum) {
-  // 배열의 요소 중 최대값을 구하고
-  // 배열을 앞에서부터 순회하면서 그 최대값과 같거나 커질때까지의 연속된 구간을 찾고
-  // 그만큼을 묶어준다. 그런 반복을 배열의 끝까지 진행하고
-  // 묶어진 개수가 workersNum과 같으면 묶은 값중 가장 큰 값을 리턴하면 되지만
-  // 그렇지 않으면 workersNum에 맞게 마지막 묶음을 나눠준 뒤 다시 큰값을 찾아 리턴해준다.
-  let maxVal = Math.max(...jobs);
-  let minVal = Math.min(...jobs);
-  let baseVal = maxVal + minVal;
-  if (maxVal === minVal) baseVal = maxVal;
-  
-  const result = [];
-  let sum = 0;
-  jobs.reverse();
-  while (jobs.length > 0) {
-    sum += jobs.pop();
-    if (sum >= baseVal) {
-      result.push(sum)
-      sum = 0;
-      --workersNum;
-    }
-
-    if (jobs.length === workersNum && sum === 0) {
-      result.push(...jobs.splice(0));
-    }
+  // memo[i][j]는 i번째 worker가 j번째 job부터 작업한다고 할 때,
+  // 최대 작업량이 최소가 되는 분배에서의 최대 작업량을 저장한다.
+  // i, j 모두 인덱스이므로 0부터 시작
+  const memo = [];
+  for (let i = 0; i < workersNum; i++) memo.push(Array(jobs.length).fill(-1));
+  // 마지막 작업자는 남아있는 모든 작업을 다 해야하므로 쉽게 계산이 가능하다.
+  // 마지막 작업자는 최대 나머지 작업자의 수만큼을 제외한 일만 할 수 있다.
+  let workload = 0;
+  for (let i = jobs.length - 1; i >= workersNum - 1; i--) {
+    workload = workload + jobs[i];
+    memo[workersNum - 1][i] = workload;
   }
 
-  return Math.max(...result);
+  const aux = (workerIdx, jobIdx, jobs, left) => {
+    // 이미 계산한 적이 있는 경우, 다시 풀지 않는다
+    // 마지막 작업자의 작업량을 전부 계산했으므로, 탈출 조건을 굳이 작성하지 않아도 된다.
+    if (memo[workerIdx][jobIdx] !== -1) return memo[workerIdx][jobIdx];
+
+    let workload = 0;
+    let min = Number.MAX_SAFE_INTEGER;
+    for (let i = jobIdx; i < jobs.length - left; i++) {
+      workload = workload + jobs[i];
+      // 가장 많이 일하는 사람의 작업량을 구한다.
+      const hardest = Math.max(
+        workload,
+        aux(workerIdx + 1, i + 1, jobs, left - 1)
+      );
+      // 그 작업량이 최소화되는 분배에서 최대 작업량을 구한다.
+      min = Math.min(min, hardest);
+    }
+    memo[workerIdx][jobIdx] = min;
+    return min;
+  };
+
+  return aux(0, 0, jobs, workersNum - 1);
 };

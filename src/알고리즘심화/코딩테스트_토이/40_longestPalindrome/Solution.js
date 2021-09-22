@@ -1,48 +1,66 @@
-let longestPalindrome = function (str) {
-  // 문자들 중에 앞뒤의 시작부터 좁혀오면서 내부가 절반까지가 전부같은걸 찾고
-  // 그 중에서 가장 긴 문자의 길이를 리턴하면 어떨까?
-  // 첫 문자이거나 끝문자가 아니면 공백도 2번 포함해서 리턴하는 것이다.
-  // 단 이어지는 문자와도 또 똑같은 부분이 있을 수 있가 때문에
-  // 만약 가장 긴 문자열을 발견한다면 서로 역방향에 살을 붙여가면서 같은 부위까지 체크를 해야할 것 같다.
+// naive solution: O(N^3)
+// function longestPalindrome(str) {
+//   if (str.length <= 1) return str.length;
 
-  // 풀이
-  // 우선 스플릿으로 앞뒤가 같은 문자열을 찾고 그중 최대길이를 얻어보자.
-  if (str.length <= 1) return str.length;
-  const arr = str.split(' ');
-  const spaceNum = str.length - 1;
-  const temp = [];
-  let isEqual = false;
+//   const checkPalindrome = function (str) {
+//     const half = parseInt(str.length / 2);
+//     for (let i = 0; i < half; i++) {
+//       if (str[i] !== str[str.length - 1 - i]) return false;
+//     }
+//     return true;
+//   };
 
-  for (let i = 0; i < arr.length; ++i) {
-    let end = arr[i].length - 1;
-    for (let j = 0; j < arr[i].length; ++j) {
-      if (j === end - j || j > end - j) {
-        temp.push(arr[i])
-        break;
-      }
-      else if (arr[i][j] === arr[i][end - j]) {
-        isEqual = true;
-        continue;
-      }
-      else {
-        isEqual = false;
-        break;
+//   // 길이가 긴 순서대로 부분 문자열을 만들어 검사한다.
+//   for (let len = str.length; len >= 1; len--) {
+//     // 길이 len인 부분 문자열들의 시작 인덱스를 구한다.
+//     // 예. 전체 길이가 100이고, 부분 문자열의 길이가 10인 경우,
+//     // 부분 문자열 (시작인덱스 ~ 마지막 인덱스)
+//     //  90 ~ 99, 89 ~ 98, 88 ~ 97, ..., 1 ~ 10, 0 ~ 9
+//     for (let startIdx = str.length - len; startIdx >= 0; startIdx--) {
+//       // slice의 특성을 고려한 마지막 인덱스 + 1 을 저장
+//       const endIdx = startIdx + len;
+//       const subStr = str.substring(startIdx, endIdx);
+//       const result = checkPalindrome(subStr);
+//       if (result === true) return len;
+//     }
+//   }
+// }
+
+function longestPalindrome(str) {
+  if (str.length < 2) return str.length;
+
+  const LENGTH = str.length;
+  const isPalindrome = Array(LENGTH)
+    .fill(false)
+    .map((_) => Array(LENGTH).fill(false));
+  // 언더바는 잘못된 코드가 아닙니다.
+  // 언더바는 어떤 매개변수는 전달되어도 무시하겠다는 의미로 사용됩니다.
+
+  let maxLen = 1;
+  // 길이가 1인 회문
+  for (let i = 0; i < LENGTH; i++) isPalindrome[i][i] = true;
+
+  // 길이가 2인 회문
+  for (let i = 0; i < LENGTH - 1; i++) {
+    if (str[i] === str[i + 1]) {
+      isPalindrome[i][i + 1] = true;
+      maxLen = 2;
+    }
+  }
+
+  // 길이가 3 이상인 회문
+  for (let len = 3; len <= LENGTH; len++) {
+    for (let startIdx = 0; startIdx <= LENGTH - len; startIdx++) {
+      const endIdx = startIdx + len - 1;
+      if (
+        isPalindrome[startIdx + 1][endIdx - 1] === true &&
+        str[startIdx] === str[endIdx]
+      ) {
+        isPalindrome[startIdx][endIdx] = true;
+        maxLen = len;
       }
     }
   }
 
-  temp.sort((a, b) => b.length - a.length);
-  let targetNum = temp[0].length;
-
-  let newStr = str.split('').reverse().join('');
-  let start1 = str.indexOf(temp[0]) + targetNum;
-  let start2 = newStr.indexOf(temp[0]) + targetNum;
-  let count = 0;
-
-  for (let i = 0; i < str.length; ++i) {
-    if (str[start1 + i] === newStr[start2 + i]) ++count;
-    else break;
-  }
-
-  return targetNum + count;
-};
+  return maxLen;
+}
