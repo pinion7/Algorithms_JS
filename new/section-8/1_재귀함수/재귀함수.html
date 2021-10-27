@@ -1,0 +1,19 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(num) {
+        if (num === 1) {
+          return 1;
+        }
+        let result = solution(num - 1) + num.toString();
+        return result * 1;
+      }
+
+      console.log(solution(3));
+    </script>
+  </body>
+</html>

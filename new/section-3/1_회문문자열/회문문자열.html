@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(str) {
+        // 풀이 1
+        let newStr = str.toLowerCase();
+        let reverseStr = newStr.split("").reverse().join("");
+        if (newStr !== reverseStr) {
+          return "NO";
+        }
+        return "YES";
+
+        // // 풀이 2
+        // let newStr = str.toLowerCase();
+        // let halfLen = parseInt(newStr.length / 2);
+        // for (let i = 0; i <= halfLen; ++i) {
+        //   if (newStr[i] !== newStr[newStr.length - 1 - i]) {
+        //     return "NO";
+        //   }
+        // }
+        // return "YES";
+      }
+
+      let str = "goooG";
+      console.log(solution(str));
+    </script>
+  </body>
+</html>

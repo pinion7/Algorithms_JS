@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(num) {
+        // 풀이 1
+        // let answer;
+        // if (num % 12 === 0) {
+        //   answer = parseInt(num / 12);
+        // } else {
+        //   answer = parseInt(num / 12) + 1;
+        // }
+        // return answer;
+
+        // 풀이 2
+        let answer = Math.ceil(num / 12);
+        return answer;
+      }
+
+      console.log(solution(25));
+      console.log(solution(178));
+    </script>
+  </body>
+</html>

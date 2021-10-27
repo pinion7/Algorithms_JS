@@ -1,0 +1,51 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(N, arr) {
+        // // 풀이 1 - 문자열 변환 -> 배열화 -> 다시 넘버타입전환 => 합하기
+        // let maxVal = 0;
+        // arr.reduce((acc, curr) => {
+        //   let sum = String(curr)
+        //     .split("")
+        //     .reduce((acc2, curr2) => acc2 * 1 + curr2 * 1);
+        //   if (sum > acc) {
+        //     acc = sum;
+        //     maxVal = curr;
+        //   }
+        //   else if (sum === acc && maxVal < curr) {
+        //     maxVal = curr;
+        //   }
+        //   return acc;
+        // }, 0);
+        // return maxVal;
+
+        // 풀이 2 -> 10으로 나누어가며 자리수를 합하기
+        let maxVal = 0;
+        arr.reduce((acc, curr) => {
+          let sum = 0;
+          let temp = curr;
+          while (temp) {
+            sum += temp % 10;
+            temp = parseInt(temp / 10);
+          }
+          if (sum > acc) {
+            acc = sum;
+            maxVal = curr;
+          } else if (sum === acc && maxVal < curr) {
+            maxVal = curr;
+          }
+          return acc;
+        }, 0);
+
+        return maxVal;
+      }
+
+      let arr = [128, 460, 603, 40, 521, 137, 123];
+      console.log(solution(7, arr));
+    </script>
+  </body>
+</html>

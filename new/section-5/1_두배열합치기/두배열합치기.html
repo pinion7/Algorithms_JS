@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(arr1, arr2) {
+        // // 풀이1 - 정렬 메소드 활용하는 방버
+        // const result = arr1.concat(arr2);
+        // result.sort((a, b) => a - b);
+        // return result;
+
+        // // 풀이2 - 코드는 길어도 더 효율적인 방법 (배열 삭제해가는 방법)
+        // const result = [];
+        // while (arr1.length && arr2.length) {
+        //   if (arr1[0] > arr2[0]) {
+        //     result.push(arr2.shift());
+        //   } else {
+        //     result.push(arr1.shift());
+        //   }
+        // }
+        // return result.concat(arr1, arr2);
+
+        // 풀이3 - 더 효율적인 방법 (투 포인터 알고리즘)
+        const result = [];
+        let [point1, point2] = [0, 0];
+        while (arr1.length > point1 && arr2.length > point2) {
+          if (arr1[point1] > arr2[point2]) {
+            result.push(arr2[point2++]);
+          } else {
+            result.push(arr1[point1++]);
+          }
+        }
+        // slice로 잘라서 concat하면 시간복잡도가 안좋을 수 있기에 while문 또 써주기
+        while (arr1.length > point1) result.push(arr1[point1++]);
+        while (arr2.length > point2) result.push(arr2[point2++]);
+        return result;
+      }
+
+      let a = [1, 3, 5];
+      let b = [2, 3, 6, 7, 9];
+      console.log(solution(a, b));
+    </script>
+  </body>
+</html>

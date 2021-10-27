@@ -1,0 +1,54 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(num, arr) {
+        arr = arr.map((el) => el.map((el2) => el2 - 1));
+        const vertex = [];
+        for (let i = 0; i < num; ++i) {
+          vertex.push(new Array(num).fill(0));
+        }
+        for (let i = 0; i < arr.length; ++i) {
+          vertex[arr[i][0]][arr[i][1]] = 1;
+        }
+
+        const visited = new Array(num).fill(false);
+        visited[0] = true;
+        let count = 0;
+
+        const dfs = (idx) => {
+          if (idx === num - 1) {
+            ++count;
+          } else {
+            for (let i = 0; i < num; ++i) {
+              if (vertex[idx][i] && !visited[i]) {
+                visited[i] = true;
+                dfs(i);
+                visited[i] = false;
+              }
+            }
+          }
+        };
+
+        dfs(0);
+        return count;
+      }
+
+      let arr = [
+        [1, 2],
+        [1, 3],
+        [1, 4],
+        [2, 1],
+        [2, 3],
+        [2, 5],
+        [3, 4],
+        [4, 2],
+        [4, 5],
+      ];
+      console.log(solution(5, arr));
+    </script>
+  </body>
+</html>
