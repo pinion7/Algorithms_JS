@@ -18,4 +18,4 @@
 ##### 입출력 예
 
 let output = solution([32, 55, 62, 20, 250, 370, 200, 30, 100]);
-console.log(output); // 1 23 2 73 2 3
+console.log(output); // 23 2 73 2 3
