@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(num) {
+        // // 풀이 1 - 반복문
+        // let sum = num;
+        // while (num > 0) {
+        //   sum += --num;
+        // }
+        // return sum;
+
+        // 풀이 2 - 재귀
+        if (num === 0) return 0;
+        return num + solution(--num);
+      }
+
+      console.log(solution(6));
+      console.log(solution(10));
+    </script>
+  </body>
+</html>
