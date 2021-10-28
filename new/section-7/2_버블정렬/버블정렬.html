@@ -6,9 +6,32 @@
   <body>
     <script>
       function solution(arr) {
-        let result;
+        // // 풀이 1 - 카운트를 이용한 버블정렬 (더 비효율적)
+        // while (true) {
+        //   let count = 0;
+        //   for (let i = 1; i < arr.length; ++i) {
+        //     if (arr[i - 1] > arr[i]) {
+        //       [arr[i - 1], arr[i]] = [arr[i], arr[i - 1]];
+        //       ++count;
+        //     }
+        //   }
+        //   if (!count) {
+        //     break;
+        //   }
+        // }
 
-        return result;
+        // return arr;
+
+        // 풀이 2 - 중첩 for문으로만 정렬
+        for (let i = 0; i < arr.length - 1; ++i) {
+          for (let j = 0; j < arr.length - i - 1; ++j) {
+            if (arr[j] > arr[j + 1]) {
+              [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+            }
+          }
+        }
+
+        return arr;
       }
 
       let arr = [13, 5, 11, 7, 23, 15];
