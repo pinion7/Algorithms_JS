@@ -6,9 +6,23 @@
   <body>
     <script>
       function solution(num) {
-        let result;
+        // // 풀이 1 - 원본 함수 자체를 이용한 재귀
+        // if (parseInt(num / 2) === 0) return String(num % 2);
+        // let result = solution(parseInt(num / 2)) + String(num % 2);
+        // return result * 1;
 
-        return result;
+        // 풀이 2 - 이너 함수를 이용한 재귀
+        let result = "";
+        const dfs = (num) => {
+          if (num === 0) return;
+          else {
+            dfs(parseInt(num / 2));
+            result += num % 2;
+          }
+        };
+
+        dfs(num);
+        return result * 1;
       }
 
       console.log(solution(11));
