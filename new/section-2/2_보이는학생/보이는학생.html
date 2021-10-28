@@ -6,8 +6,18 @@
   <body>
     <script>
       function solution(arr) {
-        const result = [];
-        return result;
+        const result = arr.reduce(
+          (acc, curr) => {
+            if (acc.maxVal < curr) {
+              acc.maxVal = curr;
+              ++acc.count;
+            }
+            return acc;
+          },
+          { count: 1, maxVal: 0 }
+        );
+
+        return result.count;
       }
 
       let arr = [130, 135, 148, 140, 145, 150, 150, 153];
