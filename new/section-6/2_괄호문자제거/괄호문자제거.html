@@ -6,13 +6,35 @@
   <body>
     <script>
       function solution(str) {
-        let result;
+        // // 풀이 1 - lastindexof 및 스플라이스 활용
+        // const stack = [];
+        // for (let i = 0; i < str.length; ++i) {
+        //   stack.push(str[i]);
+        //   if (str[i] === ")") {
+        //     let openBracketIdx = stack.lastIndexOf("(");
+        //     if (openBracketIdx !== -1) {
+        //       stack.splice(openBracketIdx, i - openBracketIdx + 1);
+        //     }
+        //   }
+        // }
 
-        return result;
+        // return stack.join("");
+
+        // 풀이 2 - stack, pop만 활용
+        const stack = [];
+        for (let i = 0; i < str.length; ++i) {
+          if (str[i] !== ")") {
+            stack.push(str[i]);
+          } else {
+            while (stack.pop() !== "(") {}
+          }
+        }
+
+        return stack.join("");
       }
 
-      let arr = [13, 5, 11, 7, 23, 15];
-      console.log(solution(arr));
+      let str = "(A(BC)D)EF(G(H)(IJ)K)LM(N)";
+      console.log(solution(str));
     </script>
   </body>
 </html>
