@@ -5,10 +5,12 @@
   </head>
   <body>
     <script>
-      function solution(arr) {
-        let result;
-
-        return result;
+      function solution(str) {
+        let alphabet = str.toLowerCase().match(/[a-z]/g);
+        if (alphabet.join("") === alphabet.reverse().join("")) {
+          return "YES";
+        }
+        return "NO";
       }
 
       let str = "found7, time: study; Yduts; emit, 7Dnuof";
