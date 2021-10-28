@@ -6,7 +6,22 @@
   <body>
     <script>
       function solution(arr1, arr2) {
-        let result;
+        arr1.sort((a, b) => a - b);
+        arr2.sort((a, b) => a - b);
+
+        const result = [];
+        let [point1, point2] = [0, 0];
+        while (arr1.length > point1 && arr2.length > point2) {
+          if (arr1[point1] < arr2[point2]) {
+            ++point1;
+          } else if (arr1[point1] > arr2[point2]) {
+            ++point2;
+          } else {
+            result.push(arr1[point1]);
+            ++point1;
+            ++point2;
+          }
+        }
 
         return result;
       }
