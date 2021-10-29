@@ -1,0 +1,57 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(num) {
+        // 풀이 1
+        const nums = [];
+        for (let i = 1; i <= num; ++i) {
+          nums.push(i);
+        }
+
+        const result = [];
+        const getSubsets = (idx, arr, bucket) => {
+          if (bucket.length !== 0) {
+            result.push(bucket);
+          }
+
+          for (let i = idx; i < arr.length; ++i) {
+            getSubsets(i + 1, arr, bucket.concat(arr[i]));
+          }
+        };
+
+        getSubsets(0, nums, []);
+        return result.map((el) => el.join("") * 1);
+
+        //   // 풀이 2
+        //   const result = [];
+        //   const visited = new Array(num + 1).fill(false);
+
+        //   const dfs = (n) => {
+        //     if (n === num + 1) {
+        //       let temp = "";
+        //       for (let i = 1; i <= num; ++i) {
+        //         if (visited[i]) {
+        //           temp += i;
+        //         }
+        //       }
+        //       if (temp.length > 0) result.push(temp * 1);
+        //     } else {
+        //       visited[n] = true;
+        //       dfs(n + 1);
+        //       visited[n] = false;
+        //       dfs(n + 1);
+        //     }
+        //   };
+
+        //   dfs(1);
+        //   return result;
+      }
+
+      console.log(solution(3));
+    </script>
+  </body>
+</html>
