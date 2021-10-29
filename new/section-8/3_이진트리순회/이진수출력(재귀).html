@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(num) {
+        const result = {
+          preOrder: [],
+          inOrder: [],
+          postOrder: [],
+        };
+        const dfs = (n) => {
+          if (n > 7) {
+            return;
+          } else {
+            result.preOrder.push(n);
+            dfs(n * 2);
+            result.inOrder.push(n);
+            dfs(n * 2 + 1);
+            result.postOrder.push(n);
+          }
+        };
+
+        dfs(num);
+        return result;
+      }
+
+      console.log(solution(1));
+    </script>
+  </body>
+</html>
