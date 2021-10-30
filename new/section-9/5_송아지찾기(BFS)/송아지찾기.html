@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(me, cow) {
+        let count = 0;
+        const visited = new Array(10001).fill(false);
+        const board = new Array(10001).fill(0);
+        const queue = [me];
+        visited[me] = true;
+        const moves = [1, -1, 5];
+        while (queue.length > 0) {
+          let curr = queue.shift();
+          for (let move of moves) {
+            let next = curr + move;
+            if (next === cow) {
+              return board[curr] + 1;
+            } else if (next > 0 && next <= 10000 && !visited[next]) {
+              visited[next] = true;
+              queue.push(next);
+              board[next] = board[curr] + 1;
+            }
+          }
+        }
+
+        return count;
+      }
+
+      console.log(solution(5, 14));
+    </script>
+  </body>
+</html>
