@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(arr) {
+        let result = 0;
+        let temp = [];
+        let testNum = arr.length;
+        let studentNum = arr[0].length;
+        for (let i = 1; i <= studentNum; ++i) {
+          for (let j = 1; j <= studentNum; ++j) {
+            let count = 0;
+            for (let k = 0; k < testNum; ++k) {
+              let pI = 0;
+              let pJ = 0;
+              for (let s = 0; s < studentNum; ++s) {
+                if (arr[k][s] === i) {
+                  pI = s;
+                }
+                if (arr[k][s] === j) {
+                  pJ = s;
+                }
+              }
+              if (pI < pJ) {
+                ++count;
+              }
+            }
+            if (count === testNum) {
+              temp.push([i, j]);
+              ++result;
+            }
+          }
+        }
+        console.log(temp);
+        return result;
+      }
+
+      let arr = [
+        [3, 4, 1, 2],
+        [4, 3, 2, 1],
+        [3, 1, 4, 2],
+      ];
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>
