@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(board, order) {
+        const stack = [];
+        let count = 0;
+        for (let el of order) {
+          for (let i = 0; i < board.length; ++i) {
+            let temp = board[i][el - 1];
+            if (temp !== 0) {
+              if (stack[stack.length - 1] === temp) {
+                stack.pop();
+                count += 2;
+              } else {
+                stack.push(temp);
+              }
+              board[i][el - 1] = 0;
+              break;
+            }
+          }
+        }
+
+        return count;
+      }
+
+      let a = [
+        [0, 0, 0, 0, 0],
+        [0, 0, 1, 0, 3],
+        [0, 2, 5, 0, 1],
+        [4, 2, 4, 4, 2],
+        [3, 5, 1, 3, 1],
+      ];
+      let b = [1, 5, 3, 5, 1, 2, 1, 4];
+      console.log(solution(a, b));
+    </script>
+  </body>
+</html>
