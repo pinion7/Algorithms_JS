@@ -1,0 +1,59 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(str, char) {
+        // 풀이 1 - O(n2) 방식
+        // const result = [];
+        // for (let i = 0; i < str.length; ++i) {
+        //   const temp = [];
+        //   for (let j = i; j < str.length; ++j) {
+        //     if (str[j] === char) {
+        //       temp.push(j - i);
+        //       break;
+        //     }
+        //   }
+
+        //   for (let k = i; k >= 0; --k) {
+        //     if (str[k] === char) {
+        //       temp.push(i - k);
+        //       break;
+        //     }
+        //   }
+        //   result.push(Math.min(...temp));
+        // }
+        // return result;
+
+        // 풀이 2 - O(n) 방식
+        const result = [9999];
+        let idx = 0;
+        for (let i = 1; i < str.length; ++i) {
+          if (str[i] !== char) {
+            result.push(++idx);
+          } else {
+            idx = 0;
+            result.push(idx);
+          }
+        }
+
+        idx = 0;
+        for (let i = result.length - 1; i >= 0; --i) {
+          if (str[i] === char) {
+            idx = 0;
+          } else {
+            ++idx;
+            result[i] = Math.min(result[i], idx);
+          }
+        }
+
+        return result;
+      }
+
+      let str = "teachermode";
+      console.log(solution(str, "e"));
+    </script>
+  </body>
+</html>
