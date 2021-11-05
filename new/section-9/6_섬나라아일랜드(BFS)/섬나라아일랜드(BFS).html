@@ -1,0 +1,64 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(arr) {
+        const out_R = arr.length;
+        const out_C = arr[0].length;
+        const isValid = (r, c) => r >= 0 && r < out_R && c >= 0 && c < out_C;
+        const moves = [
+          [1, 0],
+          [-1, 0],
+          [0, 1],
+          [0, -1],
+          [1, 1],
+          [1, -1],
+          [-1, 1],
+          [-1, -1],
+        ];
+        const bfs = (r, c) => {
+          const queue = [[r, c]];
+          arr[r][c] = 0;
+          while (queue.length > 0) {
+            let [row, col] = queue.shift();
+            moves.forEach(([mRow, mCol]) => {
+              let nRow = row + mRow;
+              let nCol = col + mCol;
+              if (isValid(nRow, nCol) && arr[nRow][nCol]) {
+                queue.push([nRow, nCol]);
+                arr[nRow][nCol] = 0;
+              }
+            });
+          }
+        };
+
+        let count = 0;
+        for (let i = 0; i < out_R; ++i) {
+          for (let j = 0; j < out_C; ++j) {
+            if (arr[i][j]) {
+              bfs(i, j);
+              ++count;
+            }
+          }
+        }
+
+        return count;
+      }
+
+      let arr = [
+        [1, 1, 0, 0, 0, 1, 0],
+        [0, 1, 1, 0, 1, 1, 0],
+        [0, 1, 0, 0, 0, 0, 0],
+        [0, 0, 0, 1, 0, 1, 1],
+        [1, 1, 0, 1, 1, 0, 0],
+        [1, 0, 0, 0, 1, 0, 0],
+        [1, 0, 1, 0, 1, 0, 0],
+      ];
+
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>
