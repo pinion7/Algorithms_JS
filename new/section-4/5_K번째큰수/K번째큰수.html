@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(K, nums) {
+        // arr.sort((a, b) => b - a);
+        // const KNum = [];
+        // for (let i = 0; arr.length; ++i) {
+        //   if (arr[i] !== arr[i + 1]) {
+        //     KNum.push(arr[i]);
+        //   }
+        //   if (KNum.length === K) {
+        //     break;
+        //   }
+        // }
+
+        const temp = new Set();
+        const sum = (arr) => {
+          return arr.reduce((acc, curr) => acc + curr);
+        };
+        const getCombination = (arr, bucket) => {
+          if (bucket.length === 3) {
+            temp.add(sum(bucket));
+            return;
+          }
+          for (let i = 0; i < arr.length; ++i) {
+            getCombination(arr.slice(i + 1), bucket.concat(arr[i]));
+          }
+        };
+
+        getCombination(nums, []);
+        const result = [...temp].sort((a, b) => b - a);
+        return result[K - 1];
+      }
+
+      let arr = [13, 15, 34, 23, 45, 65, 33, 11, 26, 42];
+      console.log(solution(3, arr));
+    </script>
+  </body>
+</html>
