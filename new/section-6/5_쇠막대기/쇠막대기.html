@@ -5,10 +5,28 @@
   </head>
   <body>
     <script>
-      function solution(str) {}
+      function solution(str) {
+        let count = 0;
+        const stack = [str[0]];
+        for (let i = 1; i < str.length; ++i) {
+          if (str[i] === "(") {
+            stack.push(str[i]);
+          } else if (str[i] === ")") {
+            stack.pop();
+            if (str[i - 1] === "(") {
+              count += stack.length;
+            } else if (str[i - 1] !== "(") {
+              ++count;
+            }
+          }
+        }
+
+        return count;
+      }
 
       let a = "()(((()())(())()))(())";
-      console.log(solution(a));
+      let b = "(((()(()()))(())()))(()())";
+      console.log(solution(a), solution(b));
     </script>
   </body>
 </html>
