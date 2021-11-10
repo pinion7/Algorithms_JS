@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(num, arr) {
+        const cache = [];
+        for (let i = 0; i < arr.length; ++i) {
+          let hit = cache.indexOf(arr[i]);
+          if (hit === -1) {
+            cache.unshift(arr[i]);
+            if (cache.length > 5) {
+              cache.pop();
+            }
+          } else {
+            cache.splice(hit, 1);
+            cache.unshift(arr[i]);
+          }
+        }
+
+        return cache;
+      }
+
+      let arr = [1, 2, 3, 2, 6, 2, 3, 5, 7];
+      console.log(solution(5, arr));
+    </script>
+  </body>
+</html>
