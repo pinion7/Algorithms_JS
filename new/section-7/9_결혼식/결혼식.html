@@ -5,7 +5,26 @@
   </head>
   <body>
     <script>
-      function solution(arr) {}
+      function solution(arr) {
+        const newArr = [];
+        arr.forEach((el) => {
+          newArr.push([el[0], "s"], [el[1], "e"]);
+        });
+        newArr.sort((a, b) => {
+          if (a[0] === b[0]) return a[1].charCodeAt() - b[1].charCodeAt();
+          else return a[0] - b[0];
+        });
+
+        let result = 0;
+        let count = 0;
+        newArr.forEach((el) => {
+          if (el[1] === "s") ++count;
+          else --count;
+          result = Math.max(result, count);
+        });
+
+        return result;
+      }
 
       let arr = [
         [14, 18],
