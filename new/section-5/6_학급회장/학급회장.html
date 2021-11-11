@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(str) {
+        // 풀이 1
+        // const obj = {};
+        // for (let el of str) {
+        //   if (obj[el] === undefined) obj[el] = 1;
+        //   else ++obj[el];
+        // }
+        // const result = Object.entries(obj);
+        // result.sort((a, b) => b[1] - a[1]);
+        // return result[0][0];
+
+        // 풀이 2 - 해쉬 Map 사용
+        const hash = new Map();
+        for (let el of str) {
+          if (!hash.has(el)) {
+            hash.set(el, 1);
+          } else {
+            hash.set(el, hash.get(el) + 1);
+          }
+        }
+
+        let max = 0;
+        let result = 0;
+        for (let [key, val] of hash) {
+          if (max < val) {
+            max = val;
+            result = key;
+          }
+        }
+
+        return result;
+      }
+
+      let str = "BACBACCACCBDEDE";
+      console.log(solution(str));
+    </script>
+  </body>
+</html>
