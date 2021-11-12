@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(str1, str2) {
+        // 풀이 1 - Map을 두개 만들어서 비교
+        // const hash1 = new Map();
+        // const hash2 = new Map();
+        // for (let i = 0; i < str1.length; ++i) {
+        //   if (!hash1.has(str1[i])) {
+        //     hash1.set(str1[i], 1);
+        //   } else hash1.set(str1[i], hash1.get(str1[i]) + 1);
+        //   if (!hash2.has(str2[i])) {
+        //     hash2.set(str2[i], 1);
+        //   } else hash2.set(str2[i], hash2.get(str2[i]) + 1);
+        // }
+        // for (let [key1, val1] of hash1) {
+        //   let val2 = hash2.get(key1);
+        //   if (!val2 || val1 !== val2) return "NO";
+        // }
+        // return "YES";
+
+        // 풀이 2 - Map을 하나만 만들되 증감 수치 결과로 비교
+        const hash = new Map();
+        for (let el of str1) {
+          if (!hash.has(el)) hash.set(el, 1);
+          else hash.set(el, hash.get(el) + 1);
+        }
+
+        for (let el of str2) {
+          if (!hash.has(el) || hash.get(el) === 0) return "NO";
+          else hash.set(el, hash.get(el) - 1);
+        }
+
+        return "YES";
+      }
+
+      let a = "AbaAeCe";
+      let b = "baeeACA";
+      console.log(solution(a, b));
+      let c = "abaCC";
+      let d = "Caaab";
+      console.log(solution(c, d));
+    </script>
+  </body>
+</html>
