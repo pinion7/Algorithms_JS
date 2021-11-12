@@ -1,0 +1,62 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(num, arr) {
+        // 풀이 1
+        // let start = -1;
+        // let result, limit;
+        // do {
+        //   limit = arr.slice(start--).reduce((acc, curr) => acc + curr);
+        //   result = [];
+        //   let temp = 0;
+        //   for (let j = 0; j < arr.length; ++j) {
+        //     if (result.length > num) break;
+        //     if (temp + arr[j] <= limit) {
+        //       temp += arr[j];
+        //     } else {
+        //       result.push(temp);
+        //       temp = arr[j];
+        //     }
+        //   }
+        //   result.push(temp);
+        // } while (result.length !== num);
+
+        // return limit;
+
+        // 풀이 2 - 결정 알고리즘
+        const count = (songs, capacity) => {
+          let cnt = 1;
+          let sum = 0;
+          for (let el of songs) {
+            if (sum + el > capacity) {
+              ++cnt;
+              sum = el;
+            } else sum += el;
+          }
+
+          return cnt;
+        };
+
+        let result;
+        let leftVal = Math.max(...arr);
+        let rightVal = arr.reduce((acc, curr) => acc + curr);
+        while (leftVal <= rightVal) {
+          let midVal = parseInt((leftVal + rightVal) / 2);
+          if (count(arr, midVal) <= num) {
+            result = midVal;
+            rightVal = midVal - 1;
+          } else leftVal = midVal + 1;
+        }
+
+        return result;
+      }
+
+      let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+      console.log(solution(3, arr));
+    </script>
+  </body>
+</html>
