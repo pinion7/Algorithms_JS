@@ -1,0 +1,50 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(S, T) {
+        const compareMaps = (map1, map2) => {
+          if (map1.size !== map2.size) return false;
+          for (let [key, val] of map1) {
+            if (!map2.has(key) || val !== map2.get(key)) return false;
+          }
+
+          return true;
+        };
+
+        let TH = new Map();
+        let SH = new Map();
+        for (let char of T) {
+          if (TH.has(char)) TH.set(char, TH.get(char) + 1);
+          else TH.set(char, 1);
+        }
+
+        let len = T.length - 1;
+        for (let i = 0; i < len; ++i) {
+          if (SH.has(S[i])) SH.set(S[i], SH.get(S[i]) + 1);
+          else SH.set(S[i], 1);
+        }
+
+        let left = 0;
+        let count = 0;
+        for (let right = len; right < S.length; ++right) {
+          if (SH.has(S[right])) SH.set(S[right], SH.get(S[right]) + 1);
+          else SH.set(S[right], 1);
+          if (compareMaps(SH, TH)) ++count;
+          SH.set(S[left], SH.get(S[left]) - 1);
+          if (SH.get(S[left]) === 0) SH.delete(S[left]);
+          ++left;
+        }
+
+        return count;
+      }
+
+      let a = "bacaAacba";
+      let b = "abc";
+      console.log(solution(a, b));
+    </script>
+  </body>
+</html>
