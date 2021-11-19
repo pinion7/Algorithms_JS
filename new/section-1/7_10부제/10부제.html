@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(num, arr) {
+        let count = 0;
+        for (let el of arr) {
+          let str = el + "";
+          if (str[str.length - 1] * 1 === num) {
+            ++count;
+          }
+        }
+
+        return count;
+      }
+
+      arr = [25, 23, 11, 47, 53, 17, 33];
+      arr2 = [12, 20, 54, 30, 87, 91, 30];
+      console.log(solution(3, arr));
+      console.log(solution(0, arr2));
+    </script>
+  </body>
+</html>
