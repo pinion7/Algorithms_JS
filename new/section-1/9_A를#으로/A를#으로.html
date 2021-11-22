@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(str) {
+        let result = "";
+        for (let el of str) {
+          if (el === "A") {
+            result += "#";
+          } else {
+            result += el;
+          }
+        }
+
+        return result;
+      }
+
+      let str = "BANANA";
+      console.log(solution(str));
+    </script>
+  </body>
+</html>
