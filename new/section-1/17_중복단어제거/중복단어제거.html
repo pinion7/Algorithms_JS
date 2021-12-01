@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(arr) {
+        const result = [];
+        for (let el of arr) {
+          if (!result.includes(el)) {
+            result.push(el);
+          }
+        }
+        return result;
+      }
+
+      let arr = ["good", "time", "good", "time", "student"];
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>
