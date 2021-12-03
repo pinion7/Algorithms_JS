@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(arr) {
+        // 1. 객체를 활용한 인덱스 사전 저장 방식
+        // const newArr = [];
+        // arr.forEach((el, idx) => {
+        //   newArr.push({ value: el, index: idx });
+        // });
+        // newArr.sort((a, b) => b.value - a.value);
+
+        // const result = [];
+        // newArr.forEach((el, idx) => {
+        //   result[el.index] = idx + 1;
+        // });
+        // return result;
+
+        // 2. 중첩 반목문으로 전체 비교를 하여, 작은 숫자에 계속 카운팅을 누적하는 방식
+        const result = new Array(arr.length).fill(1);
+        for (let i = 0; i < arr.length; i++) {
+          for (let j = 0; j < arr.length; j++) {
+            if (arr[j] > arr[i]) result[i]++;
+          }
+        }
+        return result;
+      }
+
+      let arr = [87, 89, 92, 100, 76];
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>
