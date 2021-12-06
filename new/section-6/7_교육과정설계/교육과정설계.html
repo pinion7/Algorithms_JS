@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(str1, str2) {
+        const temp = [str2.indexOf(str1[0])];
+        for (let i = 1; i < str1.length; ++i) {
+          let currIdx = str1.indexOf(str1[i]);
+          if (temp[temp.length - 1] < currIdx) {
+            temp.push(currIdx);
+          } else {
+            return "NO";
+          }
+        }
+
+        return "YES";
+      }
+
+      let a = "CBA";
+      let b = "CBDAGE";
+      console.log(solution(a, b));
+    </script>
+  </body>
+</html>
