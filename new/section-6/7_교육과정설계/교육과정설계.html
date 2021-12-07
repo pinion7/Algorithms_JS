@@ -6,16 +6,26 @@
   <body>
     <script>
       function solution(str1, str2) {
-        const temp = [str2.indexOf(str1[0])];
-        for (let i = 1; i < str1.length; ++i) {
-          let currIdx = str1.indexOf(str1[i]);
-          if (temp[temp.length - 1] < currIdx) {
-            temp.push(currIdx);
-          } else {
-            return "NO";
+        // 1. indexOf를 활용한 인덱스 확인 방식
+        // const temp = [str2.indexOf(str1[0])];
+        // for (let i = 1; i < str1.length; ++i) {
+        //   let currIdx = str1.indexOf(str1[i]);
+        //   if (temp[temp.length - 1] < currIdx) {
+        //     temp.push(currIdx);
+        //   } else {
+        //     return "NO";
+        //   }
+        // }
+        // return "YES";
+
+        // 2. array와 shift를 활용한 순서 체크 방식
+        const order = str1.split("");
+        for (let char of str2) {
+          if (order.includes(char)) {
+            if (char !== order.shift()) return "NO";
           }
         }
-
+        if (order.length > 0) return "NO";
         return "YES";
       }
 
