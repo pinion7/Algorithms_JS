@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(N, M) {
+        const result = [];
+        const permutation = (bucket) => {
+          if (bucket.length === M) {
+            result.push(bucket);
+            return;
+          }
+          for (let i = 1; i <= N; ++i) {
+            permutation(bucket.concat(i));
+          }
+        };
+
+        permutation([]);
+        return [result, result.length];
+      }
+
+      console.log(solution(3, 2));
+    </script>
+  </body>
+</html>
